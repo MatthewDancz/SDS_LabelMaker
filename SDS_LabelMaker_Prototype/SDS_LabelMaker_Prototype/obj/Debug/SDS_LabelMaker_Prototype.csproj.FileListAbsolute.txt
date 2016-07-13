@@ -7,3 +7,12 @@ C:\Users\Matthew\Desktop\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\D
 C:\Users\Matthew\Desktop\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.csproj.GenerateResource.Cache
 C:\Users\Matthew\Desktop\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.exe
 C:\Users\Matthew\Desktop\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.pdb
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\bin\Debug\SDS_LabelMaker_Prototype.exe.config
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.exe
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.pdb
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\bin\Debug\SDS_LabelMaker_Prototype.exe
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\bin\Debug\SDS_LabelMaker_Prototype.pdb
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.csprojResolveAssemblyReference.cache
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.Form1.resources
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.Properties.Resources.resources
+C:\Users\Matthew\Desktop\SDS_LabelMaker\SDS_LabelMaker_Prototype\SDS_LabelMaker_Prototype\obj\Debug\SDS_LabelMaker_Prototype.csproj.GenerateResource.Cache
