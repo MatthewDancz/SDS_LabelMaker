@@ -9,13 +9,38 @@ using System.Xml;
 
 namespace SDS_LabelMaker_Prototype
 {
+    class ServiceLayer
+    {
+        BusinessLogic BL = new BusinessLogic();
+        public void FormatLabel(string name, string id, string signal, string hazards, string manufacturer)
+        {
+            BL.UpdateLabel(name, id, signal, hazards, manufacturer);
+        }
+
+        public void SaveLabel()
+        {
+            BL.UpdateDataBase();
+        }
+    }
+
     class BusinessLogic
     {
         DAL newDal = new DAL();
         SDSLabel newLabel = new SDSLabel();
-        public void UpdateLabelText(string s)
-        {
 
+        public void UpdateLabel(string name, string id, string signal, string hazards, string manufacturer)
+        {
+            newLabel.ChemicalName = name;
+            newLabel.CASRN = id;
+            newLabel.SignalWord = signal;
+            newLabel.HazardStatement = hazards;
+            //for (int i = 0; i < hazards.Length; i++)
+            //{
+            //    newLabel.HazardStatements.Add(hazards[i]);
+            //}
+
+            newLabel.ChemicalManufacturer = manufacturer;
+            newLabel.populateProperties();
         }
 
         public void UpdateChemicalPictograms()
@@ -40,12 +65,14 @@ namespace SDS_LabelMaker_Prototype
 
         private string[] nodeNames = new string[]
         {
-            "ChemicalName",
-            "CASRN",
-            "SignalWord",
-            "HazardStatement",
+            "ChemicalName",         //index of 0
+            "CASRN",                //index of 1
+            "SignalWord",           //index of 2
+            "HazardStatement",      //index of 3
+            "ChemicalManufacturer", //index of 4
+    
             //Something for the pictorgrams
-            "ChemicalManufacturer",
+
         };
 
         XmlTextWriter xWriter = null;
@@ -76,18 +103,49 @@ namespace SDS_LabelMaker_Prototype
 
         private void createData(SDSLabel l)
         {
+            string[] dataArray = l.GetPropertiesArray();
+
             xWriter = new XmlTextWriter(path, Encoding.UTF8);
             xWriter.Formatting = Formatting.Indented;
             xWriter.WriteStartElement("SDSLabels");
             xWriter.WriteStartElement("Label");
 
-            for (int i = 0; i < nodeNames.Length; i++)
+            //Write the Chemical Name, CASRN, and Signal Word in XML format.
+            for (int i = 0; i < dataArray.Length; i++)
             {
                 xWriter.WriteStartElement(nodeNames[i]);
-                xWriter.WriteString(l.Properties[i]);
+                xWriter.WriteString(dataArray[i]);
                 xWriter.WriteEndElement();
             }
 
+            ////Write the Chemical Name in XML format.
+            //xWriter.WriteStartElement(nodeNames[0]);
+            //xWriter.WriteString(l.Properties.ElementAt(0));
+            //xWriter.WriteEndElement();
+
+            ////Write the CASRN in XML format.
+            //xWriter.WriteStartElement(nodeNames[1]);
+            //xWriter.WriteString(l.Properties.ElementAt(1));
+            //xWriter.WriteEndElement();
+
+            ////Write the Signal Word in XML format.
+            //xWriter.WriteStartElement(nodeNames[2]);
+            //xWriter.WriteString(l.Properties.ElementAt(2));
+            //xWriter.WriteEndElement();
+
+            //Write the Hazard Statements in XML format.
+            //foreach (string s in l.HazardStatements)
+            //{
+            //    xWriter.WriteStartElement(nodeNames[3]);
+            //    xWriter.WriteString(s);
+            //    xWriter.WriteEndElement();
+            //}
+
+            ////Write the Chemical Manufacturer in XML format.
+            //xWriter.WriteStartElement(nodeNames[4]);
+            //xWriter.WriteString(l.ChemicalManufacturer);
+            //xWriter.WriteEndElement();
+ 
             xWriter.WriteEndElement();//End Label Node
             xWriter.WriteEndElement();//End SDSLabels Node
             xWriter.Close();
@@ -98,10 +156,10 @@ namespace SDS_LabelMaker_Prototype
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(path);
             XmlNode label = xDoc.CreateElement("Label");
-            for (int i = 0; i < l.Properties.Length; i++)
+            for (int i = 0; i < l.Properties.Count; i++)
             {
                 XmlNode x = xDoc.CreateElement(nodeNames[i]);
-                x.InnerText = l.Properties[i];
+                x.InnerText = l.Properties.ElementAt(i);
                 label.AppendChild(x);
             }
 
@@ -129,19 +187,41 @@ namespace SDS_LabelMaker_Prototype
 
     class SDSLabel
     {
-        public string[] Properties = null;
+        public List<string> Properties = new List<string>();
+
         public string ChemicalName = null;
         public string CASRN = null;
         public string SignalWord = null;
-        public string[] HazardStatements = null;
+        public string HazardStatement = null;
+        public List<string> HazardStatements = new List<string>();
 
         //Some way to store pictures.
 
-        public string[] ChemicalManufacturer = null;
-    }
+        public string ChemicalManufacturer = null;
 
-    class HazardStatement
-    {
+        public void populateProperties()
+        {
+            Properties.Add(ChemicalName);
+            Properties.Add(CASRN);
+            Properties.Add(SignalWord);
+            Properties.Add(HazardStatement);
 
+            //foreach (string s in HazardStatements)
+            //{
+            //    Properties.Add(s);
+            //}
+
+            Properties.Add(ChemicalManufacturer);
+        }
+
+        public void AddHazardStatement(string s)
+        {
+            HazardStatements.Add(s);
+        }
+
+        public string[] GetPropertiesArray()
+        {
+            return Properties.ToArray();
+        }
     }
 }

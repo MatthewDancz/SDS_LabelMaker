@@ -32,9 +32,11 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBoxChemicalManufacturer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxHazardStatements = new System.Windows.Forms.TextBox();
             this.listViewPictograms = new System.Windows.Forms.ListView();
             this.comboBoxHazardStatements = new System.Windows.Forms.ComboBox();
             this.comboBoxSignalWord = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCASRN = new System.Windows.Forms.ComboBox();
             this.comboBoxName = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,7 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -61,9 +62,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.No;
-            this.richTextBox1.Location = new System.Drawing.Point(11, 126);
+            this.richTextBox1.Location = new System.Drawing.Point(11, 54);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -77,21 +78,26 @@
             this.textBoxChemicalManufacturer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxChemicalManufacturer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxChemicalManufacturer.Location = new System.Drawing.Point(12, 658);
+            this.textBoxChemicalManufacturer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxChemicalManufacturer.Location = new System.Drawing.Point(10, 614);
             this.textBoxChemicalManufacturer.Name = "textBoxChemicalManufacturer";
-            this.textBoxChemicalManufacturer.Size = new System.Drawing.Size(597, 22);
+            this.textBoxChemicalManufacturer.Size = new System.Drawing.Size(250, 22);
             this.textBoxChemicalManufacturer.TabIndex = 5;
+            this.textBoxChemicalManufacturer.Text = "Airgas";
             this.textBoxChemicalManufacturer.TextChanged += new System.EventHandler(this.textBoxChemicalManufacturer_TextChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBoxHazardStatements);
             this.groupBox1.Controls.Add(this.listViewPictograms);
             this.groupBox1.Controls.Add(this.comboBoxHazardStatements);
             this.groupBox1.Controls.Add(this.comboBoxSignalWord);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBoxCASRN);
             this.groupBox1.Controls.Add(this.comboBoxName);
+            this.groupBox1.Controls.Add(this.textBoxChemicalManufacturer);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -107,13 +113,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Label Inputs";
             // 
+            // textBoxHazardStatements
+            // 
+            this.textBoxHazardStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxHazardStatements.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxHazardStatements.Location = new System.Drawing.Point(10, 210);
+            this.textBoxHazardStatements.Multiline = true;
+            this.textBoxHazardStatements.Name = "textBoxHazardStatements";
+            this.textBoxHazardStatements.ReadOnly = true;
+            this.textBoxHazardStatements.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxHazardStatements.Size = new System.Drawing.Size(250, 74);
+            this.textBoxHazardStatements.TabIndex = 7;
+            this.textBoxHazardStatements.Text = "Highly flammable liquid and vapor.\r\nMay form explosive mixtures with air.\r\n";
+            this.textBoxHazardStatements.WordWrap = false;
+            // 
             // listViewPictograms
             // 
             this.listViewPictograms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewPictograms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listViewPictograms.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewPictograms.Location = new System.Drawing.Point(10, 233);
+            this.listViewPictograms.Location = new System.Drawing.Point(10, 306);
             this.listViewPictograms.Name = "listViewPictograms";
             this.listViewPictograms.Size = new System.Drawing.Size(250, 287);
             this.listViewPictograms.TabIndex = 0;
@@ -126,7 +146,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxHazardStatements.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxHazardStatements.FormattingEnabled = true;
-            this.comboBoxHazardStatements.Location = new System.Drawing.Point(10, 182);
+            this.comboBoxHazardStatements.Location = new System.Drawing.Point(10, 181);
             this.comboBoxHazardStatements.Name = "comboBoxHazardStatements";
             this.comboBoxHazardStatements.Size = new System.Drawing.Size(250, 23);
             this.comboBoxHazardStatements.TabIndex = 4;
@@ -142,6 +162,19 @@
             this.comboBoxSignalWord.Name = "comboBoxSignalWord";
             this.comboBoxSignalWord.Size = new System.Drawing.Size(250, 23);
             this.comboBoxSignalWord.TabIndex = 3;
+            this.comboBoxSignalWord.Text = "Danger";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 596);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Chemical Manufacturer";
             // 
             // comboBoxCASRN
             // 
@@ -154,6 +187,7 @@
             this.comboBoxCASRN.Name = "comboBoxCASRN";
             this.comboBoxCASRN.Size = new System.Drawing.Size(250, 23);
             this.comboBoxCASRN.TabIndex = 2;
+            this.comboBoxCASRN.Text = "001114";
             // 
             // comboBoxName
             // 
@@ -166,6 +200,7 @@
             this.comboBoxName.Name = "comboBoxName";
             this.comboBoxName.Size = new System.Drawing.Size(250, 23);
             this.comboBoxName.TabIndex = 1;
+            this.comboBoxName.Text = "Ethanol";
             // 
             // label6
             // 
@@ -174,7 +209,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(7, 208);
+            this.label6.Location = new System.Drawing.Point(7, 288);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 15);
             this.label6.TabIndex = 0;
@@ -253,23 +288,13 @@
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 640);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Chemical Manufacturer";
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonPrint
             // 
             this.buttonPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPrint.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrint.Location = new System.Drawing.Point(532, 459);
+            this.buttonPrint.Location = new System.Drawing.Point(532, 387);
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.Size = new System.Drawing.Size(77, 26);
             this.buttonPrint.TabIndex = 0;
@@ -280,20 +305,21 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 108);
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(7, 29);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 15);
+            this.label7.Size = new System.Drawing.Size(104, 19);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Print Preview";
+            this.label7.Text = "Label Preview";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 619);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 92);
+            this.pictureBox1.Size = new System.Drawing.Size(598, 72);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
@@ -321,9 +347,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.buttonPrint);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBoxChemicalManufacturer);
             this.Controls.Add(this.richTextBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpButton = true;
@@ -359,6 +383,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.TextBox textBoxHazardStatements;
     }
 }
 
