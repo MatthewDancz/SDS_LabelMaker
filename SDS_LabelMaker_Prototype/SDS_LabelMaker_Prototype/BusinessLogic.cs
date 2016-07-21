@@ -97,8 +97,31 @@ namespace SDS_LabelMaker_Prototype
             }
         }
 
+        //The following method may need to return a string detailing why a label was rejected for saving.
         public bool shouldLabelBeAdded(SDSLabel l)
         {
+            //SDSLabels
+            //Label
+            //nodeNames
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(path);
+            XmlNodeList nodes = xDoc.SelectNodes("SDSLabels/Label/ChemicalName");
+            foreach (XmlNode node in nodes)
+            {
+                if (node.InnerText == l.ChemicalName)
+                {
+                    return false;
+                }
+            }
+
+            nodes = xDoc.SelectNodes("SDSLabels/Label/CASRN");
+            foreach (XmlNode node in nodes)
+            {
+                if (node.InnerText == l.CASRN)
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
