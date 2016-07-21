@@ -25,11 +25,12 @@ namespace SDS_LabelMaker_Prototype
 
     class BusinessLogic
     {
+        SDSLabel newLabel = null;
         DAL newDal = new DAL();
-        SDSLabel newLabel = new SDSLabel();
 
         public void UpdateLabel(string name, string id, string signal, string hazards, string manufacturer)
         {
+            newLabel = new SDSLabel();
             newLabel.ChemicalName = name;
             newLabel.CASRN = id;
             newLabel.SignalWord = signal;
@@ -110,45 +111,18 @@ namespace SDS_LabelMaker_Prototype
             xWriter.WriteStartElement("SDSLabels");
             xWriter.WriteStartElement("Label");
 
-            //Write the Chemical Name, CASRN, and Signal Word in XML format.
+            //Write the label data in XML format.
             for (int i = 0; i < dataArray.Length; i++)
             {
                 xWriter.WriteStartElement(nodeNames[i]);
                 xWriter.WriteString(dataArray[i]);
                 xWriter.WriteEndElement();
             }
-
-            ////Write the Chemical Name in XML format.
-            //xWriter.WriteStartElement(nodeNames[0]);
-            //xWriter.WriteString(l.Properties.ElementAt(0));
-            //xWriter.WriteEndElement();
-
-            ////Write the CASRN in XML format.
-            //xWriter.WriteStartElement(nodeNames[1]);
-            //xWriter.WriteString(l.Properties.ElementAt(1));
-            //xWriter.WriteEndElement();
-
-            ////Write the Signal Word in XML format.
-            //xWriter.WriteStartElement(nodeNames[2]);
-            //xWriter.WriteString(l.Properties.ElementAt(2));
-            //xWriter.WriteEndElement();
-
-            //Write the Hazard Statements in XML format.
-            //foreach (string s in l.HazardStatements)
-            //{
-            //    xWriter.WriteStartElement(nodeNames[3]);
-            //    xWriter.WriteString(s);
-            //    xWriter.WriteEndElement();
-            //}
-
-            ////Write the Chemical Manufacturer in XML format.
-            //xWriter.WriteStartElement(nodeNames[4]);
-            //xWriter.WriteString(l.ChemicalManufacturer);
-            //xWriter.WriteEndElement();
  
             xWriter.WriteEndElement();//End Label Node
             xWriter.WriteEndElement();//End SDSLabels Node
             xWriter.Close();
+            MessageBox.Show("Label data saved.");
         }
 
         private void addSDSLabel(SDSLabel l)
