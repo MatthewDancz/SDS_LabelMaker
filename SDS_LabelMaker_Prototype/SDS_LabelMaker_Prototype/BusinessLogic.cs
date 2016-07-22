@@ -86,19 +86,25 @@ namespace SDS_LabelMaker_Prototype
                 return;
             }
 
-            bool ToAdd = shouldLabelBeAdded(l);//Conditional Check for labels existence
-            if (ToAdd)
+            bool ToAddName = NameCheck(l);//Conditional Check for labels existence
+            bool ToAddCASRN = CASRNCheck(l);
+
+            if (ToAddName)
             {
                 addSDSLabel(l);
             }
-            if (!ToAdd)
+            if (!ToAddName && ToAddCASRN)
+            {
+                MessageBox.Show("CASRN number already in use.");
+            }
+            if (!ToAddName && !ToAddCASRN)
             {
                 updateData(l);
             }
         }
 
         //The following method may need to return a string detailing why a label was rejected for saving.
-        public bool shouldLabelBeAdded(SDSLabel l)
+        public bool NameCheck(SDSLabel l)
         {
             //SDSLabels
             //Label
@@ -114,7 +120,15 @@ namespace SDS_LabelMaker_Prototype
                 }
             }
 
-            nodes = xDoc.SelectNodes("SDSLabels/Label/CASRN");
+            return true;
+        }
+
+        public bool CASRNCheck(SDSLabel l)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(path);
+            XmlNodeList nodes = xDoc.SelectNodes("SDSLabels/Label/CASRN");
+
             foreach (XmlNode node in nodes)
             {
                 if (node.InnerText == l.CASRN)
@@ -122,6 +136,7 @@ namespace SDS_LabelMaker_Prototype
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -168,7 +183,22 @@ namespace SDS_LabelMaker_Prototype
 
         private void updateData(SDSLabel l)
         {
-            
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(path);
+
+            foreach (XmlNode n in xDoc.SelectNodes("SDSLabels/Label"))
+            {
+                if (n.SelectSingleNode(nodeNames[0]).InnerText.ToLower() == l.ChemicalName.ToLower())
+                {
+                    for (int i = 0; i < l.Properties.Count - 1; i++)
+                    {
+                        n.SelectSingleNode(nodeNames[i]).InnerText = l.Properties.ElementAt(i);
+                    }
+                }
+            }
+
+            xDoc.Save(path);
+            MessageBox.Show("Saving Changes.", "Saving");
         }
 
         public void RetrieveData()
