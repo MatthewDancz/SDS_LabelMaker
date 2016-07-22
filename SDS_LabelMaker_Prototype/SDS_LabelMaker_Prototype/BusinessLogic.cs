@@ -89,17 +89,26 @@ namespace SDS_LabelMaker_Prototype
             bool ToAddName = NameCheck(l);//Conditional Check for labels existence
             bool ToAddCASRN = CASRNCheck(l);
 
-            if (ToAddName)
+            if (ToAddName && !ToAddCASRN)
+            {
+                MessageBox.Show("CASRN number already in use.", "Duplicate CASRN Error");
+            }
+            else if (!ToAddName)
+            {
+                DialogResult result = DialogResult.No;
+                result = MessageBox.Show("This chemical has already been saved, would you like to update the results?", "Update Data", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    updateData(l);
+                }
+            }
+            else if (ToAddName && ToAddCASRN)
             {
                 addSDSLabel(l);
             }
-            if (!ToAddName && ToAddCASRN)
+            else
             {
-                MessageBox.Show("CASRN number already in use.");
-            }
-            if (!ToAddName && !ToAddCASRN)
-            {
-                updateData(l);
+                return;
             }
         }
 
