@@ -32,6 +32,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBoxChemicalManufacturer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonCreate = new System.Windows.Forms.Button();
             this.textBoxHazardStatements = new System.Windows.Forms.TextBox();
             this.listViewPictograms = new System.Windows.Forms.ListView();
             this.comboBoxHazardStatements = new System.Windows.Forms.ComboBox();
@@ -90,6 +91,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.buttonCreate);
             this.groupBox1.Controls.Add(this.textBoxHazardStatements);
             this.groupBox1.Controls.Add(this.listViewPictograms);
             this.groupBox1.Controls.Add(this.comboBoxHazardStatements);
@@ -113,6 +115,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Label Inputs";
             // 
+            // buttonCreate
+            // 
+            this.buttonCreate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreate.Location = new System.Drawing.Point(185, 649);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(75, 27);
+            this.buttonCreate.TabIndex = 8;
+            this.buttonCreate.Text = "Create";
+            this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
             // textBoxHazardStatements
             // 
             this.textBoxHazardStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -124,7 +137,7 @@
             this.textBoxHazardStatements.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxHazardStatements.Size = new System.Drawing.Size(250, 74);
             this.textBoxHazardStatements.TabIndex = 7;
-            this.textBoxHazardStatements.Text = "Highly flammable liquid and vapor.\r\nMay form explosive mixtures with air.\r\n";
+            this.textBoxHazardStatements.Text = "Highly flammable liquid and vapor.\r\nMay form explosive mixtures with air.";
             this.textBoxHazardStatements.WordWrap = false;
             // 
             // listViewPictograms
@@ -282,7 +295,7 @@
             // 
             this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonSave.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(185, 649);
+            this.buttonSave.Location = new System.Drawing.Point(104, 649);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 27);
             this.buttonSave.TabIndex = 6;
@@ -384,6 +397,7 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TextBox textBoxHazardStatements;
+        private System.Windows.Forms.Button buttonCreate;
     }
 }
 
