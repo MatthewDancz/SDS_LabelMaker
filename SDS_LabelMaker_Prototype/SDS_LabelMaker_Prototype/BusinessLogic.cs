@@ -31,7 +31,7 @@ namespace SDS_LabelMaker_Prototype
         public void UpdateLabel(string name, string id, string signal, string hazards, string manufacturer)
         {
             newLabel = new SDSLabel();
-            newLabel.ChemicalName = name;
+            newLabel.ProductName = name;
             newLabel.CASRN = id;
             newLabel.SignalWord = signal;
             newLabel.HazardStatement = hazards;
@@ -56,7 +56,7 @@ namespace SDS_LabelMaker_Prototype
 
         public void UpdateLabelData(string s)
         {
-            newLabel.ChemicalName = s;
+            newLabel.ProductName = s;
         }
     }
 
@@ -87,28 +87,19 @@ namespace SDS_LabelMaker_Prototype
             }
 
             bool ToAddName = NameCheck(l);//Conditional Check for labels existence
-            bool ToAddCASRN = CASRNCheck(l);
 
-            if (ToAddName && !ToAddCASRN)
-            {
-                MessageBox.Show("CASRN number already in use.", "Duplicate CASRN Error");
-            }
-            else if (!ToAddName)
+            if (!ToAddName)
             {
                 DialogResult result = DialogResult.No;
-                result = MessageBox.Show("This chemical has already been saved, would you like to update the results?", "Update Data", MessageBoxButtons.YesNo);
+                result = MessageBox.Show("This product has already been saved, would you like to update the data?", "Update Data", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     updateData(l);
                 }
             }
-            else if (ToAddName && ToAddCASRN)
-            {
-                addSDSLabel(l);
-            }
             else
             {
-                return;
+                addSDSLabel(l);
             }
         }
 
@@ -123,24 +114,7 @@ namespace SDS_LabelMaker_Prototype
             XmlNodeList nodes = xDoc.SelectNodes("SDSLabels/Label/ChemicalName");
             foreach (XmlNode node in nodes)
             {
-                if (node.InnerText == l.ChemicalName)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool CASRNCheck(SDSLabel l)
-        {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(path);
-            XmlNodeList nodes = xDoc.SelectNodes("SDSLabels/Label/CASRN");
-
-            foreach (XmlNode node in nodes)
-            {
-                if (node.InnerText == l.CASRN)
+                if (node.InnerText == l.ProductName)
                 {
                     return false;
                 }
@@ -197,7 +171,7 @@ namespace SDS_LabelMaker_Prototype
 
             foreach (XmlNode n in xDoc.SelectNodes("SDSLabels/Label"))
             {
-                if (n.SelectSingleNode(nodeNames[0]).InnerText.ToLower() == l.ChemicalName.ToLower())
+                if (n.SelectSingleNode(nodeNames[0]).InnerText.ToLower() == l.ProductName.ToLower())
                 {
                     for (int i = 0; i < l.Properties.Count - 1; i++)
                     {
@@ -225,7 +199,7 @@ namespace SDS_LabelMaker_Prototype
     {
         public List<string> Properties = new List<string>();
 
-        public string ChemicalName = null;
+        public string ProductName = null;
         public string CASRN = null;
         public string SignalWord = null;
         public string HazardStatement = null;
@@ -237,7 +211,7 @@ namespace SDS_LabelMaker_Prototype
 
         public void populateProperties()
         {
-            Properties.Add(ChemicalName);
+            Properties.Add(ProductName);
             Properties.Add(CASRN);
             Properties.Add(SignalWord);
             Properties.Add(HazardStatement);

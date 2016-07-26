@@ -32,7 +32,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBoxChemicalManufacturer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
             this.textBoxHazardStatements = new System.Windows.Forms.TextBox();
             this.listViewPictograms = new System.Windows.Forms.ListView();
             this.comboBoxHazardStatements = new System.Windows.Forms.ComboBox();
@@ -72,7 +71,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(598, 327);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
-            this.richTextBox1.Text = "this is a test of the emergency broadcast anus.";
+            this.richTextBox1.Text = "";
             // 
             // textBoxChemicalManufacturer
             // 
@@ -91,7 +90,6 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.buttonCreate);
             this.groupBox1.Controls.Add(this.textBoxHazardStatements);
             this.groupBox1.Controls.Add(this.listViewPictograms);
             this.groupBox1.Controls.Add(this.comboBoxHazardStatements);
@@ -115,17 +113,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Label Inputs";
             // 
-            // buttonCreate
-            // 
-            this.buttonCreate.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreate.Location = new System.Drawing.Point(185, 649);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 27);
-            this.buttonCreate.TabIndex = 8;
-            this.buttonCreate.Text = "Create";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
             // textBoxHazardStatements
             // 
             this.textBoxHazardStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -139,6 +126,7 @@
             this.textBoxHazardStatements.TabIndex = 7;
             this.textBoxHazardStatements.Text = "Highly flammable liquid and vapor.\r\nMay form explosive mixtures with air.";
             this.textBoxHazardStatements.WordWrap = false;
+            this.textBoxHazardStatements.TextChanged += new System.EventHandler(this.textBoxHazardStatements_TextChanged);
             // 
             // listViewPictograms
             // 
@@ -176,6 +164,7 @@
             this.comboBoxSignalWord.Size = new System.Drawing.Size(250, 23);
             this.comboBoxSignalWord.TabIndex = 3;
             this.comboBoxSignalWord.Text = "Danger";
+            this.comboBoxSignalWord.TextChanged += new System.EventHandler(this.comboBoxSignalWord_TextChanged);
             // 
             // label1
             // 
@@ -201,6 +190,7 @@
             this.comboBoxCASRN.Size = new System.Drawing.Size(250, 23);
             this.comboBoxCASRN.TabIndex = 2;
             this.comboBoxCASRN.Text = "001114";
+            this.comboBoxCASRN.TextChanged += new System.EventHandler(this.comboBoxCASRN_TextChanged);
             // 
             // comboBoxName
             // 
@@ -214,6 +204,7 @@
             this.comboBoxName.Size = new System.Drawing.Size(250, 23);
             this.comboBoxName.TabIndex = 1;
             this.comboBoxName.Text = "Ethanol";
+            this.comboBoxName.TextChanged += new System.EventHandler(this.comboBoxName_TextChanged);
             // 
             // label6
             // 
@@ -276,9 +267,9 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 15);
+            this.label2.Size = new System.Drawing.Size(82, 15);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Chemical Name";
+            this.label2.Text = "Product Name";
             // 
             // buttonDelete
             // 
@@ -295,7 +286,7 @@
             // 
             this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonSave.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(104, 649);
+            this.buttonSave.Location = new System.Drawing.Point(185, 649);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 27);
             this.buttonSave.TabIndex = 6;
@@ -397,7 +388,6 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TextBox textBoxHazardStatements;
-        private System.Windows.Forms.Button buttonCreate;
     }
 }
 
