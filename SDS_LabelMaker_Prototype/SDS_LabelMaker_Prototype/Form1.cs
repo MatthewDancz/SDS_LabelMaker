@@ -109,7 +109,7 @@ namespace SDS_LabelMaker_Prototype
 
             //Select the Hazard Statements, and return their font to standard.
             int HazardStatementIndex = richTextBox1.Text.LastIndexOf(textBoxHazardStatements.Text);
-            richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
+            //richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
             richTextBox1.SelectionBackColor = Color.White;
             richTextBox1.SelectionColor = Color.Black;
             richTextBox1.SelectionFont = fontBase;
