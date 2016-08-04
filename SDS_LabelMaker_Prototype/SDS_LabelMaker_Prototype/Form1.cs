@@ -26,7 +26,6 @@ namespace SDS_LabelMaker_Prototype
         public Form1()
         {
             InitializeComponent();
-            updateAutoSuggestion();
             updateProductList();
         }
 
@@ -44,14 +43,14 @@ namespace SDS_LabelMaker_Prototype
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            SL.FormatLabel(comboBoxName.Text, comboBoxCASRN.Text, comboBoxSignalWord.Text, textBoxHazardStatements.Text, textBoxProductManufacturer.Text);
+            SL.FormatLabel(textBoxProductName.Text, textBoxCASRN.Text, comboBoxSignalWord.Text, textBoxHazardStatements.Text, textBoxProductManufacturer.Text);
             SL.SaveLabel();
         }
 
         private void UpdateLabelPreview()
         {
-            myLabel.ProductName = comboBoxName.Text;
-            myLabel.CASRN = comboBoxCASRN.Text;
+            myLabel.ProductName = textBoxProductName.Text;
+            myLabel.CASRN = textBoxCASRN.Text;
             myLabel.SignalWord = comboBoxSignalWord.Text;
             myLabel.HazardStatement = textBoxHazardStatements.Text;
             myLabel.ProductManufacturer = textBoxProductManufacturer.Text;
@@ -95,7 +94,7 @@ namespace SDS_LabelMaker_Prototype
             richTextBox1.SelectionFont = fontName;
 
             //Select the CASRN list, and return the font to standard.
-            int CASRNIndex = richTextBox1.Text.LastIndexOf(comboBoxCASRN.Text);
+            int CASRNIndex = richTextBox1.Text.LastIndexOf(textBoxCASRN.Text);
             richTextBox1.Select(CASRNIndex, myLabel.CASRN.Length);
             richTextBox1.SelectionBackColor = Color.White;
             richTextBox1.SelectionColor = Color.Black;
@@ -110,7 +109,7 @@ namespace SDS_LabelMaker_Prototype
 
             //Select the Hazard Statements, and return their font to standard.
             int HazardStatementIndex = richTextBox1.Text.LastIndexOf(textBoxHazardStatements.Text);
-            //richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
+            richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
             richTextBox1.SelectionBackColor = Color.White;
             richTextBox1.SelectionColor = Color.Black;
             richTextBox1.SelectionFont = fontBase;
@@ -145,6 +144,11 @@ namespace SDS_LabelMaker_Prototype
             UpdateLabelPreview();
         }
 
+        private void textBoxCASRN_TextChanged(object sender, EventArgs e)
+        {
+            UpdateLabelPreview();
+        }
+
         private void comboBoxName_TextChanged(object sender, EventArgs e)
         {
             UpdateLabelPreview();
@@ -163,43 +167,57 @@ namespace SDS_LabelMaker_Prototype
             }
         }
 
-        private void updateAutoSuggestion()
-        {
-            List<string> results = SL.SearchDataBase(comboBoxName.Text);
+        //private void updateAutoSuggestion()
+        //{
+        //    List<string> results = SL.SearchDataBase(comboBoxName.Text);
 
-            comboBoxName.Items.Clear();
+        //    comboBoxName.Items.Clear();
 
-            comboBoxName.SelectionStart = comboBoxName.Text.Length;
-            comboBoxName.SelectionLength = 0;
+        //    comboBoxName.SelectionStart = comboBoxName.Text.Length;
+        //    comboBoxName.SelectionLength = 0;
 
-            foreach (string s in results)
-            {
-                comboBoxName.Items.Add(s);
-            }
-        }
+        //    foreach (string s in results)
+        //    {
+        //        comboBoxName.Items.Add(s);
+        //    }
+        //}
 
-        private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string s = comboBoxName.SelectedItem.ToString();
-            SDSLabel r = SL.getLabelData(s.ToLower());
+        //private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string s = comboBoxName.SelectedItem.ToString();
+        //    SDSLabel r = SL.getLabelData(s.ToLower());
 
-            comboBoxName.Text = r.ProductName;
-            comboBoxCASRN.Text = r.CASRN;
-            comboBoxSignalWord.Text = r.SignalWord;
-            textBoxHazardStatements.Text = r.HazardStatement;
-            textBoxProductManufacturer.Text = r.ProductManufacturer;
-        }
+        //    comboBoxName.Text = r.ProductName;
+        //    comboBoxCASRN.Text = r.CASRN;
+        //    comboBoxSignalWord.Text = r.SignalWord;
+        //    textBoxHazardStatements.Text = r.HazardStatement;
+        //    textBoxProductManufacturer.Text = r.ProductManufacturer;
+        //}
 
         private void listBoxProductDataBase_SelectedIndexChanged(object sender, EventArgs e)
         {
             string s = listBoxProductDataBase.SelectedItem.ToString();
             SDSLabel r = SL.getLabelData(s.ToLower());
 
-            comboBoxName.Text = r.ProductName;
-            comboBoxCASRN.Text = r.CASRN;
+            textBoxProductName.Text = r.ProductName;
+            textBoxCASRN.Text = r.CASRN;
             comboBoxSignalWord.Text = r.SignalWord;
             textBoxHazardStatements.Text = r.HazardStatement;
             textBoxProductManufacturer.Text = r.ProductManufacturer;
+
+            listBoxProductDataBase.Visible = false;
         }
+
+        private void textBoxProductName_TextChanged(object sender, EventArgs e)
+        {
+            updateProductList();
+            listBoxProductDataBase.Visible = true;
+            if (listBoxProductDataBase.Items.Count == 0)
+            {
+                listBoxProductDataBase.Visible = false;
+            }
+        }
+
+        
     }
 }
