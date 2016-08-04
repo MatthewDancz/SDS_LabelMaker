@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBoxChemicalManufacturer = new System.Windows.Forms.TextBox();
+            this.textBoxProductManufacturer = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxHazardStatements = new System.Windows.Forms.TextBox();
             this.listViewPictograms = new System.Windows.Forms.ListView();
@@ -38,7 +38,6 @@
             this.comboBoxSignalWord = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCASRN = new System.Windows.Forms.ComboBox();
-            this.comboBoxName = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,11 +47,12 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.comboBoxName = new System.Windows.Forms.ComboBox();
+            this.listBoxProductDataBase = new System.Windows.Forms.ListBox();
+            this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -73,18 +73,17 @@
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
             // 
-            // textBoxChemicalManufacturer
+            // textBoxProductManufacturer
             // 
-            this.textBoxChemicalManufacturer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxProductManufacturer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxChemicalManufacturer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxChemicalManufacturer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxChemicalManufacturer.Location = new System.Drawing.Point(10, 614);
-            this.textBoxChemicalManufacturer.Name = "textBoxChemicalManufacturer";
-            this.textBoxChemicalManufacturer.Size = new System.Drawing.Size(250, 22);
-            this.textBoxChemicalManufacturer.TabIndex = 5;
-            this.textBoxChemicalManufacturer.Text = "Airgas";
-            this.textBoxChemicalManufacturer.TextChanged += new System.EventHandler(this.textBoxChemicalManufacturer_TextChanged);
+            this.textBoxProductManufacturer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxProductManufacturer.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxProductManufacturer.Location = new System.Drawing.Point(10, 614);
+            this.textBoxProductManufacturer.Name = "textBoxProductManufacturer";
+            this.textBoxProductManufacturer.Size = new System.Drawing.Size(250, 22);
+            this.textBoxProductManufacturer.TabIndex = 5;
+            this.textBoxProductManufacturer.TextChanged += new System.EventHandler(this.textBoxChemicalManufacturer_TextChanged);
             // 
             // groupBox1
             // 
@@ -97,7 +96,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBoxCASRN);
             this.groupBox1.Controls.Add(this.comboBoxName);
-            this.groupBox1.Controls.Add(this.textBoxChemicalManufacturer);
+            this.groupBox1.Controls.Add(this.textBoxProductManufacturer);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -124,7 +123,6 @@
             this.textBoxHazardStatements.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxHazardStatements.Size = new System.Drawing.Size(250, 74);
             this.textBoxHazardStatements.TabIndex = 7;
-            this.textBoxHazardStatements.Text = "Highly flammable liquid and vapor.\r\nMay form explosive mixtures with air.";
             this.textBoxHazardStatements.WordWrap = false;
             this.textBoxHazardStatements.TextChanged += new System.EventHandler(this.textBoxHazardStatements_TextChanged);
             // 
@@ -159,11 +157,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSignalWord.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxSignalWord.FormattingEnabled = true;
+            this.comboBoxSignalWord.Items.AddRange(new object[] {
+            "Danger",
+            "Warning",
+            "Non-Hazardous"});
             this.comboBoxSignalWord.Location = new System.Drawing.Point(10, 137);
             this.comboBoxSignalWord.Name = "comboBoxSignalWord";
             this.comboBoxSignalWord.Size = new System.Drawing.Size(250, 23);
             this.comboBoxSignalWord.TabIndex = 3;
-            this.comboBoxSignalWord.Text = "Danger";
             this.comboBoxSignalWord.TextChanged += new System.EventHandler(this.comboBoxSignalWord_TextChanged);
             // 
             // label1
@@ -189,22 +190,7 @@
             this.comboBoxCASRN.Name = "comboBoxCASRN";
             this.comboBoxCASRN.Size = new System.Drawing.Size(250, 23);
             this.comboBoxCASRN.TabIndex = 2;
-            this.comboBoxCASRN.Text = "001114";
             this.comboBoxCASRN.TextChanged += new System.EventHandler(this.comboBoxCASRN_TextChanged);
-            // 
-            // comboBoxName
-            // 
-            this.comboBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxName.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxName.FormattingEnabled = true;
-            this.comboBoxName.Location = new System.Drawing.Point(10, 46);
-            this.comboBoxName.Name = "comboBoxName";
-            this.comboBoxName.Size = new System.Drawing.Size(250, 23);
-            this.comboBoxName.TabIndex = 1;
-            this.comboBoxName.Text = "Ethanol";
-            this.comboBoxName.TextChanged += new System.EventHandler(this.comboBoxName_TextChanged);
             // 
             // label6
             // 
@@ -316,18 +302,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Label Preview";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 619);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(598, 72);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            // 
             // printPreviewDialog1
             // 
             this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
@@ -343,12 +317,45 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
+            // comboBoxName
+            // 
+            this.comboBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxName.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxName.FormattingEnabled = true;
+            this.comboBoxName.Location = new System.Drawing.Point(10, 46);
+            this.comboBoxName.Name = "comboBoxName";
+            this.comboBoxName.Size = new System.Drawing.Size(250, 23);
+            this.comboBoxName.TabIndex = 1;
+            this.comboBoxName.SelectedIndexChanged += new System.EventHandler(this.comboBoxName_SelectedIndexChanged);
+            this.comboBoxName.TextChanged += new System.EventHandler(this.comboBoxName_TextChanged);
+            // 
+            // listBoxProductDataBase
+            // 
+            this.listBoxProductDataBase.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxProductDataBase.FormattingEnabled = true;
+            this.listBoxProductDataBase.ItemHeight = 15;
+            this.listBoxProductDataBase.Location = new System.Drawing.Point(13, 418);
+            this.listBoxProductDataBase.Name = "listBoxProductDataBase";
+            this.listBoxProductDataBase.Size = new System.Drawing.Size(596, 270);
+            this.listBoxProductDataBase.TabIndex = 8;
+            this.listBoxProductDataBase.SelectedIndexChanged += new System.EventHandler(this.listBoxProductDataBase_SelectedIndexChanged);
+            // 
+            // textBoxProductName
+            // 
+            this.textBoxProductName.Location = new System.Drawing.Point(194, 388);
+            this.textBoxProductName.Name = "textBoxProductName";
+            this.textBoxProductName.Size = new System.Drawing.Size(100, 22);
+            this.textBoxProductName.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 703);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.textBoxProductName);
+            this.Controls.Add(this.listBoxProductDataBase);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.groupBox1);
@@ -359,14 +366,13 @@
             this.Text = "SDS_LabelMaker";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxChemicalManufacturer;
+        private System.Windows.Forms.TextBox textBoxProductManufacturer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonDelete;
@@ -376,18 +382,19 @@
         private System.Windows.Forms.ComboBox comboBoxHazardStatements;
         private System.Windows.Forms.ComboBox comboBoxSignalWord;
         private System.Windows.Forms.ComboBox comboBoxCASRN;
-        private System.Windows.Forms.ComboBox comboBoxName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TextBox textBoxHazardStatements;
+        private System.Windows.Forms.ComboBox comboBoxName;
+        private System.Windows.Forms.ListBox listBoxProductDataBase;
+        private System.Windows.Forms.TextBox textBoxProductName;
     }
 }
 

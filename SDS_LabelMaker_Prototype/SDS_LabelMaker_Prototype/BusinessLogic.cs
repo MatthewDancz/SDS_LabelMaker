@@ -21,6 +21,16 @@ namespace SDS_LabelMaker_Prototype
         {
             BL.UpdateDataBase();
         }
+
+        public List<string> SearchDataBase(string s)
+        {
+            return BL.SearchDataBase(s);
+        }
+
+        public SDSLabel getLabelData(string s)
+        {
+            return BL.getLabelData(s);
+        }
     }
 
     class BusinessLogic
@@ -40,7 +50,7 @@ namespace SDS_LabelMaker_Prototype
             //    newLabel.HazardStatements.Add(hazards[i]);
             //}
 
-            newLabel.ChemicalManufacturer = manufacturer;
+            newLabel.ProductManufacturer = manufacturer;
             newLabel.populateProperties();
         }
 
@@ -57,6 +67,16 @@ namespace SDS_LabelMaker_Prototype
         public void UpdateLabelData(string s)
         {
             newLabel.ProductName = s;
+        }
+
+        public List<string> SearchDataBase(string s)
+        {
+            return newDal.SearchDataBase(s);
+        }
+
+        public SDSLabel getLabelData(string s)
+        {
+            return newDal.getLabelData(s);
         }
     }
 
@@ -184,9 +204,49 @@ namespace SDS_LabelMaker_Prototype
             MessageBox.Show("Saving Changes.", "Saving");
         }
 
-        public void RetrieveData()
+        public List<string> SearchDataBase(string s)
         {
+            List<string> stringList = null;
+            // SDSLabels
+            //Label
+            //nodeNames
+            if (File.Exists(path))
+            {
+                stringList = new List<string>();
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(path);
+                foreach (XmlNode node in xDoc.SelectNodes("SDSLabels/Label"))
+                {
+                    if (node.InnerText.ToLower().Contains(s.ToLower()))
+                    {
+                        stringList.Add(node.SelectSingleNode(nodeNames[0]).InnerText);
+                    }
+                }
+            }
+            return stringList;
+        }
 
+        public SDSLabel getLabelData(string s)
+        {
+            SDSLabel retrievedLabel = new SDSLabel();
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(path);
+
+            foreach (XmlNode node in xDoc.SelectNodes("SDSLabels/Label"))
+            {
+                if (node.InnerText.ToLower().Contains(s))
+                {
+                    retrievedLabel.ProductName = node.SelectSingleNode(nodeNames[0]).InnerText;
+                    retrievedLabel.CASRN = node.SelectSingleNode(nodeNames[1]).InnerText;
+                    retrievedLabel.SignalWord = node.SelectSingleNode(nodeNames[2]).InnerText;
+                    retrievedLabel.HazardStatement = node.SelectSingleNode(nodeNames[3]).InnerText;
+                    retrievedLabel.ProductManufacturer = node.SelectSingleNode(nodeNames[4]).InnerText;
+                    retrievedLabel.populateProperties();
+                }
+            }
+
+            return retrievedLabel;
         }
 
         public void DeleteData()
@@ -207,7 +267,7 @@ namespace SDS_LabelMaker_Prototype
 
         //Some way to store pictures.
 
-        public string ChemicalManufacturer = null;
+        public string ProductManufacturer = null;
 
         public void populateProperties()
         {
@@ -221,7 +281,7 @@ namespace SDS_LabelMaker_Prototype
             //    Properties.Add(s);
             //}
 
-            Properties.Add(ChemicalManufacturer);
+            Properties.Add(ProductManufacturer);
         }
 
         public void AddHazardStatement(string s)

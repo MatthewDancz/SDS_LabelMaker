@@ -14,12 +14,20 @@ namespace SDS_LabelMaker_Prototype
     {
         ServiceLayer SL = new ServiceLayer();
         List<string> LabelData = new List<string>();
+        List<string> results = new List<string>();
+
+        Font fontBase = new Font("Times New Roman", 9.75F, FontStyle.Regular);
+        Font fontName = new Font("Times New Roman", 20, FontStyle.Bold);
+
+        SDSLabel myLabel = new SDSLabel();
 
         string enter = "\n";
 
         public Form1()
         {
             InitializeComponent();
+            updateAutoSuggestion();
+            updateProductList();
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
@@ -31,38 +39,89 @@ namespace SDS_LabelMaker_Prototype
         {
             //Font font1 = new Font("Times New Roman", 20, FontStyle.Regular);
 
-            e.Graphics.DrawString(richTextBox1.Text, richTextBox1.Font, Brushes.Black, 100, 200);
+            e.Graphics.DrawString(richTextBox1.Text, fontName, Brushes.Black, 100, 200);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            SL.FormatLabel(comboBoxName.Text, comboBoxCASRN.Text, comboBoxSignalWord.Text, textBoxHazardStatements.Text, textBoxChemicalManufacturer.Text);
+            SL.FormatLabel(comboBoxName.Text, comboBoxCASRN.Text, comboBoxSignalWord.Text, textBoxHazardStatements.Text, textBoxProductManufacturer.Text);
             SL.SaveLabel();
         }
 
         private void UpdateLabelPreview()
         {
-            Font baseFont = new Font("Times New Roman", 9.75F, FontStyle.Regular);
-            Font fontName = new Font("Times New Roman", 20, FontStyle.Bold);
+            myLabel.ProductName = comboBoxName.Text;
+            myLabel.CASRN = comboBoxCASRN.Text;
+            myLabel.SignalWord = comboBoxSignalWord.Text;
+            myLabel.HazardStatement = textBoxHazardStatements.Text;
+            myLabel.ProductManufacturer = textBoxProductManufacturer.Text;
+            myLabel.populateProperties();  
 
-            //Reset the Font so everything looks right.
-            richTextBox1.Font = baseFont;
+            richTextBox1.Text = myLabel.ProductName + enter;
+            richTextBox1.AppendText(myLabel.CASRN + enter);
+            richTextBox1.AppendText(myLabel.SignalWord + enter);
+            richTextBox1.AppendText(myLabel.HazardStatement + enter);
+            richTextBox1.AppendText(myLabel.ProductManufacturer);
+            
+            //foreach (string s in myLabel.Properties)
+            //{
+            //    int index = richTextBox1.Text.LastIndexOf(s);
+            //    richTextBox1.Select(index, s.Length);
+            //    if (myLabel.ProductName == s)
+            //    {
+            //        richTextBox1.SelectionBackColor = Color.Black;
+            //        richTextBox1.SelectionFont = fontName;
+            //    }
+            //    else
+            //    {
+            //        richTextBox1.SelectionBackColor = Color.White;
+            //        richTextBox1.SelectionFont = fontBase;
+            //    }
 
-            richTextBox1.Text = comboBoxName.Text + enter;
-            richTextBox1.AppendText(comboBoxCASRN.Text + enter);
-            richTextBox1.AppendText(comboBoxSignalWord.Text + enter);
-            richTextBox1.AppendText(textBoxHazardStatements.Text + enter);
-            richTextBox1.AppendText(textBoxChemicalManufacturer.Text);
+            //    if (myLabel.ProductManufacturer == s)
+            //    {
+            //        richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+            //    }
+            //    else
+            //    {
+            //        richTextBox1.SelectionAlignment = HorizontalAlignment.Left;
+            //    }
+            //}
 
             //Select the Chemical Name, Highlight it in black and change the color to white.
-            richTextBox1.Select(0, comboBoxName.Text.Length);
+            richTextBox1.Select(0, myLabel.ProductName.Length);
             richTextBox1.SelectionBackColor = Color.Black;
             richTextBox1.SelectionColor = Color.White;
             richTextBox1.SelectionFont = fontName;
 
-            //Select the Chemical Manufacturer and align it in the center.
-            int ChemicalManufacturerIndex = richTextBox1.Text.LastIndexOf(textBoxChemicalManufacturer.Text);
-            richTextBox1.Select(ChemicalManufacturerIndex, textBoxChemicalManufacturer.Text.Length);
+            //Select the CASRN list, and return the font to standard.
+            int CASRNIndex = richTextBox1.Text.LastIndexOf(comboBoxCASRN.Text);
+            richTextBox1.Select(CASRNIndex, myLabel.CASRN.Length);
+            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox1.SelectionColor = Color.Black;
+            richTextBox1.SelectionFont = fontBase;
+
+            //Select the Signal Word, and return the font to standard.
+            int SignalWordIndex = richTextBox1.Text.LastIndexOf(myLabel.SignalWord);
+            richTextBox1.Select(SignalWordIndex, myLabel.SignalWord.Length);
+            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox1.SelectionColor = Color.Black;
+            richTextBox1.SelectionFont = fontBase;
+
+            //Select the Hazard Statements, and return their font to standard.
+            int HazardStatementIndex = richTextBox1.Text.LastIndexOf(textBoxHazardStatements.Text);
+            //richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
+            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox1.SelectionColor = Color.Black;
+            richTextBox1.SelectionFont = fontBase;
+
+            //Select the Chemical Manufacturer, return the font to standard, and align it in the center.
+            int ChemicalManufacturerIndex = richTextBox1.Text.LastIndexOf(textBoxProductManufacturer.Text);
+            richTextBox1.Select(ChemicalManufacturerIndex, textBoxProductManufacturer.Text.Length);
+            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox1.SelectionColor = Color.Black;
+            richTextBox1.SelectionFont = fontBase;
+            richTextBox1.Select(ChemicalManufacturerIndex, textBoxProductManufacturer.Text.Length);
             richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
         }
 
@@ -89,6 +148,58 @@ namespace SDS_LabelMaker_Prototype
         private void comboBoxName_TextChanged(object sender, EventArgs e)
         {
             UpdateLabelPreview();
+            //updateAutoSuggestion();
+        }
+
+        private void updateProductList()
+        {
+            List<string> results = SL.SearchDataBase(textBoxProductName.Text);
+
+            listBoxProductDataBase.Items.Clear();
+
+            foreach (string s in results)
+            {
+                listBoxProductDataBase.Items.Add(s);
+            }
+        }
+
+        private void updateAutoSuggestion()
+        {
+            List<string> results = SL.SearchDataBase(comboBoxName.Text);
+
+            comboBoxName.Items.Clear();
+
+            comboBoxName.SelectionStart = comboBoxName.Text.Length;
+            comboBoxName.SelectionLength = 0;
+
+            foreach (string s in results)
+            {
+                comboBoxName.Items.Add(s);
+            }
+        }
+
+        private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = comboBoxName.SelectedItem.ToString();
+            SDSLabel r = SL.getLabelData(s.ToLower());
+
+            comboBoxName.Text = r.ProductName;
+            comboBoxCASRN.Text = r.CASRN;
+            comboBoxSignalWord.Text = r.SignalWord;
+            textBoxHazardStatements.Text = r.HazardStatement;
+            textBoxProductManufacturer.Text = r.ProductManufacturer;
+        }
+
+        private void listBoxProductDataBase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = listBoxProductDataBase.SelectedItem.ToString();
+            SDSLabel r = SL.getLabelData(s.ToLower());
+
+            comboBoxName.Text = r.ProductName;
+            comboBoxCASRN.Text = r.CASRN;
+            comboBoxSignalWord.Text = r.SignalWord;
+            textBoxHazardStatements.Text = r.HazardStatement;
+            textBoxProductManufacturer.Text = r.ProductManufacturer;
         }
     }
 }
