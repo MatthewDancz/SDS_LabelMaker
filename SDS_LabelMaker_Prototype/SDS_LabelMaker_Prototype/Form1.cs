@@ -107,13 +107,6 @@ namespace SDS_LabelMaker_Prototype
             richTextBox1.SelectionColor = Color.Black;
             richTextBox1.SelectionFont = fontBase;
 
-            //Select the Hazard Statements, and return their font to standard.
-            int HazardStatementIndex = richTextBox1.Text.LastIndexOf(textBoxHazardStatements.Text);
-            //richTextBox1.Select(HazardStatementIndex, textBoxHazardStatements.Text.Length);
-            richTextBox1.SelectionBackColor = Color.White;
-            richTextBox1.SelectionColor = Color.Black;
-            richTextBox1.SelectionFont = fontBase;
-
             //Select the Chemical Manufacturer, return the font to standard, and align it in the center.
             int ChemicalManufacturerIndex = richTextBox1.Text.LastIndexOf(textBoxProductManufacturer.Text);
             richTextBox1.Select(ChemicalManufacturerIndex, textBoxProductManufacturer.Text.Length);
@@ -122,6 +115,13 @@ namespace SDS_LabelMaker_Prototype
             richTextBox1.SelectionFont = fontBase;
             richTextBox1.Select(ChemicalManufacturerIndex, textBoxProductManufacturer.Text.Length);
             richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+
+            //Select the Hazard Statements, and return their font to standard.
+            int HazardStatementIndex = richTextBox1.Text.LastIndexOf(textBoxHazardStatements.Text);
+            richTextBox1.Select(SignalWordIndex + myLabel.SignalWord.Length + 1, ChemicalManufacturerIndex - 1);
+            richTextBox1.SelectionBackColor = Color.White;
+            richTextBox1.SelectionColor = Color.Black;
+            richTextBox1.SelectionFont = fontBase;
         }
 
         private void textBoxChemicalManufacturer_TextChanged(object sender, EventArgs e)
